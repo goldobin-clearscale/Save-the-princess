@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bounce : MonoBehaviour
 {
    void onCollisionEnter2D(Collision collision) {
-       Rigidbody2D rb = collision.collider.GetComponent<Rigidbody2D>
+       Rigidbody2D rb = collision.collider.GetComponent<Rigidbody2D>();
    }
 }
  
