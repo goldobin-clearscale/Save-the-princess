@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Dragonbones;
 
 public class Move : MonoBehaviour
 {
@@ -23,7 +22,7 @@ public class Move : MonoBehaviour
         }
         if(Input.GetAxis("Horizontal") == 0){
             //run animation
-             this.GetComponent<UnityArmatureComponent>().animation.Play("run");
+            //  this.GetComponent<UnityArmatureComponent>().animation.Play("run");
         }
         else {
             Flip();
