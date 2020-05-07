@@ -5,7 +5,9 @@ using DragonBones;
 
 public class Move : MonoBehaviour
 {
+
     bool isFaceRight = true;
+    // UnityArmatureComponent armatureComponent = GetComponent<UnityArmatureComponent> ();
     Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -21,10 +23,12 @@ public class Move : MonoBehaviour
             Jump(); 
         }
         if(Input.GetAxis("Horizontal") == 0){
-            //run animation
-              rb.animation.Play("run");
+            //run animation when run
+              this.GetComponent<UnityArmatureComponent>().animation.Play("run");  
         }
         else {
+            //when staying 
+            // this.GetComponent<UnityArmatureComponent>().animation.Play("State");  
             Flip();
         }
         
