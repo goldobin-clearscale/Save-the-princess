@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DragonBones;
 
 public class Move : MonoBehaviour
 {
@@ -10,7 +11,6 @@ public class Move : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D> ();
-
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class Move : MonoBehaviour
         }
         if(Input.GetAxis("Horizontal") == 0){
             //run animation
-            //  this.GetComponent<UnityArmatureComponent>().animation.Play("run");
+              rb.animation.Play("run");
         }
         else {
             Flip();
