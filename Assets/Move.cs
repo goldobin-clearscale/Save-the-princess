@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Dragonbones;
 
 public class Move : MonoBehaviour
 {
-
+    bool isFaceRight = true;
     Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class Move : MonoBehaviour
         }
         if(Input.GetAxis("Horizontal") == 0){
             //run animation
+             this.GetComponent<UnityArmatureComponent>().animation.Play("run");
         }
         else {
             Flip();
@@ -30,12 +32,12 @@ public class Move : MonoBehaviour
     }
 
     void Flip(){
-        if(Input.GetAxis("Horizontal") > 0){
-            transform.localRotation = Quaternion.Euler (0, 0, 0);
-        }
-        if(Input.GetAxis("Horizontal") < 0) {
-            transform.localRotation = Quaternion.Euler (0, 180, 0);
-        }
+        if (Input.GetAxisRaw ("Horizontal") > 0.5f && !isFaceRight || Input.GetAxisRaw ("Horizontal") < -0.5f && isFaceRight){
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+            isFaceRight = !isFaceRight;
+        } 
     }
 
     void FixedUpdate () {
