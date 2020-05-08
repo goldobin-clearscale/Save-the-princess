@@ -9,26 +9,33 @@ public class Move : MonoBehaviour
     bool isFaceRight = true;
     // UnityArmatureComponent armatureComponent = GetComponent<UnityArmatureComponent> ();
     Rigidbody2D rb;
+    UnityArmatureComponent myArmature;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D> ();
+        myArmature = GetComponent<UnityArmatureComponent>();
+        // myArmature.animation.Play("State");
     }
 
     // Update is called once per frame
     void Update()
     {
+        myArmature = GetComponent<UnityArmatureComponent>();
+        // myArmature.animation.Play("run"); 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump(); 
         }
         if(Input.GetAxis("Horizontal") == 0){
             //run animation when run
-              this.GetComponent<UnityArmatureComponent>().animation.Play("run");  
+            myArmature.animation.Play("run");  
+            // myArmature.animation.Play("Stand");
         }
         else {
             //when staying 
-            // this.GetComponent<UnityArmatureComponent>().animation.Play("State");  
+            // this.GetComponent<UnityArmatureComponent>().animation.Play("State"); 
+            // myArmature.animation.Play("Stand");  
             Flip();
         }
         
@@ -49,5 +56,8 @@ public class Move : MonoBehaviour
 
     void Jump () {
         rb.AddForce(transform.up * 11f, ForceMode2D.Impulse);
+        myArmature = GetComponent<UnityArmatureComponent>();
+        // myArmature.animation.Play("State");
+        // myArmature.animation.FadeIn("stand2", 0.05f, -1, 0);
     }
 }
