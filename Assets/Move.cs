@@ -11,31 +11,38 @@ public class Move : MonoBehaviour
     Rigidbody2D rb;
     UnityArmatureComponent myArmature;
     // Start is called before the first frame update
+
+    string currentAnimation = "State";
     void Start()
     {
         rb = GetComponent<Rigidbody2D> ();
         myArmature = GetComponent<UnityArmatureComponent>();
+        // myArmature.animation.Play("State");
         // myArmature.animation.Play("State");
     }
 
     // Update is called once per frame
     void Update()
     {
-        myArmature = GetComponent<UnityArmatureComponent>();
         // myArmature.animation.Play("run"); 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump(); 
         }
         if(Input.GetAxis("Horizontal") == 0){
-            //run animation when run
-            myArmature.animation.Play("run");  
-            // myArmature.animation.Play("Stand");
+            //run animation when staying
+            if(currentAnimation != "State"){
+                currentAnimation = "State";
+                myArmature.animation.Play("State");
+            }
+            
         }
         else {
             //when staying 
-            // this.GetComponent<UnityArmatureComponent>().animation.Play("State"); 
-            // myArmature.animation.Play("Stand");  
+            if(currentAnimation != "run"){
+                currentAnimation = "run";
+                myArmature.animation.Play("run");
+            }  
             Flip();
         }
         
@@ -55,9 +62,10 @@ public class Move : MonoBehaviour
     }
 
     void Jump () {
+        // myArmature.animation.FadeIn("State", 0.025f, 0, 1);
+        currentAnimation = "jump";
+        myArmature.animation.FadeIn("jump", 0.05f, 0, 1);
         rb.AddForce(transform.up * 11f, ForceMode2D.Impulse);
-        myArmature = GetComponent<UnityArmatureComponent>();
-        // myArmature.animation.Play("State");
         // myArmature.animation.FadeIn("stand2", 0.05f, -1, 0);
     }
 }
