@@ -64,7 +64,7 @@ public class Move : MonoBehaviour
     void Jump () {
         // myArmature.animation.FadeIn("State", 0.025f, 0, 1);
         currentAnimation = "jump";
-        myArmature.animation.FadeIn("jump", 0.05f, 0, 1);
+        myArmature.animation.FadeIn("jump", 0.1f, 0, 1);
         rb.AddForce(transform.up * 11f, ForceMode2D.Impulse);
         // myArmature.animation.FadeIn("stand2", 0.05f, -1, 0);
     }
