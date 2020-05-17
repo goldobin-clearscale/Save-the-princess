@@ -15,6 +15,8 @@ public class EnemyPatrol : MonoBehaviour
     bool chill = true;
     bool angry = false;
     bool goBack = false;
+    bool isFaceRight = true;
+    float oldPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +39,15 @@ public class EnemyPatrol : MonoBehaviour
            angry = false;
        }
 
+       if (transform.position.x > oldPosition && !isFaceRight) {
+           Flip();
+       }
+       else if(transform.position.x < oldPosition && isFaceRight) {
+           Flip();
+       }
+
+       oldPosition = transform.position.x;
+
        if(chill == true){
            Chill();
        }
@@ -46,6 +57,13 @@ public class EnemyPatrol : MonoBehaviour
        else if(goBack == true){
            GoBack();
        }
+    }
+
+    void Flip() {
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+        isFaceRight = !isFaceRight;
     }
 
     void Chill() {

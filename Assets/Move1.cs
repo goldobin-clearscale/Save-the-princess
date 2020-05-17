@@ -14,7 +14,7 @@ public class Move1 : MonoBehaviour
     UnityArmatureComponent myArmature;
     // Start is called before the first frame update
 
-    string currentAnimation = "State";
+    string currentAnimation = "idol";
     void Start()
     {
         rb = GetComponent<Rigidbody2D> ();
@@ -27,7 +27,7 @@ public class Move1 : MonoBehaviour
     void Update()
     {
         // myArmature.animation.Play("run"); 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && currentAnimation != "jump")
         {
             Jump();
 			//StartCoroutine(Jump());
@@ -40,9 +40,9 @@ public class Move1 : MonoBehaviour
 		if (anim_state != state.ground) return;
 		if (Input.GetAxis("Horizontal") == 0){
             //run animation when staying
-            if(currentAnimation != "State"){
-                currentAnimation = "State";
-				myArmature.animation.FadeIn("State", 0.05f, -1);
+            if(currentAnimation != "Idol"){
+                currentAnimation = "Idol";
+				myArmature.animation.FadeIn("Idol", 0.05f, -1);
             }
             
         }
@@ -68,7 +68,7 @@ public class Move1 : MonoBehaviour
 				{
 					if (rb.velocity.y < 0)
 					{
-						myArmature.animation.FadeIn("jump_middle", 0.25f, 1);
+						myArmature.animation.FadeIn("jump_middle", 0.05f, 1);
 						anim_state = state.jump_middle;
 						Debug.Log("sw_1");
 					}
@@ -76,9 +76,9 @@ public class Move1 : MonoBehaviour
 				}
 			case state.jump_middle:
 				{
-					if (Mathf.Abs(rb.velocity.y) <= 0.4f)
+					if (Mathf.Abs(rb.velocity.y) <= 1f)
 					{
-						myArmature.animation.FadeIn("jump_end", 0.05f, 1);
+						// myArmature.animation.FadeIn("jump_end", 0.25f, 1);
 						anim_state = state.jump_end;
 						Debug.Log("sw_2");
 					}
@@ -115,7 +115,7 @@ public class Move1 : MonoBehaviour
         // myArmature.animation.FadeIn("State", 0.025f, 0, 1);
         currentAnimation = "jump";
         myArmature.animation.FadeIn("jump_start", 0.05f, 1);
-        rb.AddForce(transform.up * 11f, ForceMode2D.Impulse);
+        rb.AddForce(transform.up * 15f, ForceMode2D.Impulse);
 		anim_state = state.jump_start;
 		// myArmature.animation.FadeIn("stand2", 0.05f, -1, 0);
 	}
